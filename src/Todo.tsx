@@ -1,6 +1,9 @@
 import TodoItem from "./TodoItem";
 
-export interface TodoProps {}
+export interface TodoProps {
+  showAddForm: boolean;
+  setShowAddForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const mockTodos = [
   { id: 1, title: "Make todo header." },
@@ -23,7 +26,10 @@ export default function Todo(props: TodoProps) {
           <TodoItem key={todo.id} title={todo.title} />
         ))}
       </ul>
-      <button className="text-black bg-slate-200 px-4 py-3 w-full rounded-md">
+      <button
+        className="text-black bg-slate-200 px-4 py-3 w-full rounded-md"
+        onClick={() => props.setShowAddForm(true)}
+      >
         Add todo
       </button>
     </div>
