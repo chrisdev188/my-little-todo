@@ -1,18 +1,13 @@
+import { Todo } from "./App";
 import TodoItem from "./TodoItem";
 
 export interface TodoProps {
   showAddForm: boolean;
   setShowAddForm: React.Dispatch<React.SetStateAction<boolean>>;
+  todo: Todo[];
 }
 
-const mockTodos = [
-  { id: 1, title: "Make todo header." },
-  { id: 2, title: "Make todo body." },
-  { id: 3, title: "Make todo header." },
-  { id: 4, title: "Learn how to make a simple custom animation." },
-];
-
-export default function Todo(props: TodoProps) {
+export default function TodoList(props: TodoProps) {
   return (
     <div className="bg-slate-50 p-6 rounded-xl">
       <h2 className="text-black text-2xl font-semibold flex items-center gap-1">
@@ -21,11 +16,15 @@ export default function Todo(props: TodoProps) {
           <img src="/todo.png" alt="todo" />
         </div>
       </h2>
-      <ul className="flex flex-col p-6 gap-6 my-4">
-        {mockTodos.map((todo) => (
-          <TodoItem key={todo.id} title={todo.title} />
-        ))}
-      </ul>
+      {props.todo.length > 0 ? (
+        <ul className="flex flex-col p-6 gap-6 my-4">
+          {props.todo.map((todo) => (
+            <TodoItem key={todo.title} title={todo.title} />
+          ))}
+        </ul>
+      ) : (
+        <p className="p-6">There is no todo...</p>
+      )}
       <button
         className="text-black bg-slate-200 px-4 py-3 w-full rounded-md"
         onClick={() => props.setShowAddForm(true)}
