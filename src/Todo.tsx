@@ -5,21 +5,24 @@ export interface TodoProps {
   showAddForm: boolean;
   setShowAddForm: React.Dispatch<React.SetStateAction<boolean>>;
   todo: Todo[];
+  handleDelete: (id: number) => void;
 }
 
 export default function TodoList(props: TodoProps) {
   return (
-    <div className="bg-slate-50 p-6 rounded-xl">
+    <div className="bg-slate-50 p-6 rounded-xl w-96 shadow-2xl">
       <h2 className="text-black text-2xl font-semibold flex items-center gap-1">
         <span>Todo</span>
-        <div className="max-w-[2rem]">
-          <img src="/todo.png" alt="todo" />
-        </div>
       </h2>
       {props.todo.length > 0 ? (
         <ul className="flex flex-col p-6 gap-6 my-4">
           {props.todo.map((todo) => (
-            <TodoItem key={todo.title} title={todo.title} />
+            <TodoItem
+              key={todo.id}
+              title={todo.title}
+              onDelete={props.handleDelete}
+              id={todo.id}
+            />
           ))}
         </ul>
       ) : (
